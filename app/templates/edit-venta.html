@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <div class="card card-body">
+      <form action="/update_venta/{{venta.ID}}" method="POST">
+        <div class="form-group">
+          <input type="text" name="fecha_venta" value="{{venta.Fecha_Venta}}" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="total_venta" value="{{venta.Total_Venta}}" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="metodo_pago" value="{{venta.Metodo_Pago}}" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="cliente_id" value="{{venta.Cliente_ID}}" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="vendedor_id" value="{{venta.Vendedor_ID}}" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="carrito_id" value="{{venta.Carrito_ID}}" class="form-control">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

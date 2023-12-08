@@ -1,0 +1,519 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!--BARRA DE MENU-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Menú</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#tablaCliente">Tabla Cliente</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tablaVendedor">Tabla Vendedor</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tablaProducto">Tabla Productos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tablaAlmacen">Tabla Almacen</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tablaCarrito">Tabla Carrito</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tablaVenta">Tabla Ventas</a>
+      </li>
+     
+</nav>
+
+<br>
+
+<!-- CLIENTE -->
+<div id="tablaCliente" class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">TABLA CLIENTE</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="card card-body">
+      <form action="{{url_for('clientes.add_cliente')}}" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="apellido" placeholder="Apellido">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="direccion" placeholder="Dirección">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="correo_electronico" placeholder="Correo Electrónico">
+        </div>
+        <button class="btn btn-primary btn-block">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Nombre</td>
+          <td>Apellido</td>
+          <td>Dirección</td>
+          <td>Teléfono</td>
+          <td>Correo Electrónico</td>
+          <td>Operaciones</td>
+        </tr>
+      </thead>
+      <tbody>     
+        {% for cliente in clientes %}
+        <tr>
+          <td>{{cliente.ID}}</td>
+          <td>{{cliente.Nombre}}</td>
+          <td>{{cliente.Apellido}}</td>
+          <td>{{cliente.Direccion}}</td>
+          <td>{{cliente.Telefono}}</td>
+          <td>{{cliente.Correo_Electronico}}</td>
+          <td>
+            <a href="/edit_cliente/{{cliente.ID}}" class="btn btn-secondary">Editar</a>
+            <a href="/delete_cliente/{{cliente.ID}}" class="btn btn-danger btn-delete">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="#inicio" class="btn btn-warning">Regresar</a>
+  </div>
+</div>
+<br>
+
+<br>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<br>
+
+
+<!-- VENDEDOR -->
+<br>
+<div id="tablaVendedor" class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">TABLA VENDEDOR</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="card card-body">
+      <form action="{{url_for('vendedores.add_vendedor')}}" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="apellido" placeholder="Apellido">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="correo_electronico" placeholder="Correo Electrónico">
+        </div>
+        <button class="btn btn-primary btn-block">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Nombre</td>
+          <td>Apellido</td>
+          <td>Teléfono</td>
+          <td>Correo Electrónico</td>
+          <td>Operaciones</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for vendedor in vendedores %}
+        <tr>
+          <td>{{vendedor.ID}}</td>
+          <td>{{vendedor.Nombre}}</td>
+          <td>{{vendedor.Apellido}}</td>
+          <td>{{vendedor.Telefono}}</td>
+          <td>{{vendedor.Correo_Electronico}}</td>
+          <td>
+            <a href="/edit_vendedor/{{vendedor.ID}}" class="btn btn-secondary">Editar</a>
+            <a href="/delete_vendedor/{{vendedor.ID}}" class="btn btn-danger btn-delete">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="#inicio" class="btn btn-warning">Regresar</a>
+  </div>
+</div>
+<br>
+
+<br>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<br>
+
+<!-- PRODUCTO -->
+<br>
+<div id="tablaProducto" class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">TABLA PRODUCTOS</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="card card-body">
+      <form action="{{url_for('productos.add_producto')}}" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="descripcion" placeholder="Descripción">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="precio" placeholder="Precio">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="stock" placeholder="Stock">
+        </div>
+        <button class="btn btn-primary btn-block">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Nombre</td>
+          <td>Descripción</td>
+          <td>Precio</td>
+          <td>Stock</td>
+          <td>Operaciones</td>
+        </tr>
+      </thead>
+      <tbody>     
+        {% for producto in productos %}
+        <tr>
+          <td>{{producto.ID}}</td>
+          <td>{{producto.Nombre}}</td>
+          <td>{{producto.Descripcion}}</td>
+          <td>{{producto.Precio}}</td>
+          <td>{{producto.Stock}}</td>
+          <td>
+            <a href="/edit_producto/{{producto.ID}}" class="btn btn-secondary">Editar</a>
+            <a href="/delete_producto/{{producto.ID}}" class="btn btn-danger btn-delete">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="#inicio" class="btn btn-warning">Regresar</a>
+  </div>
+</div>
+<br>
+
+<br>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<br>
+
+<!-- ALMACÉN -->
+<br>
+<div id="tablaAlmacen" class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">TABLA ALMACEN</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="card card-body">
+      <form action="{{ url_for('almacen.add_almacen') }}" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="direccion" placeholder="Dirección">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
+        </div>
+        <button class="btn btn-primary btn-block">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Nombre</td>
+          <td>Dirección</td>
+          <td>Teléfono</td>
+          <td>Operaciones</td>
+        </tr>
+      </thead>
+      <tbody>     
+        {% for almacen in almacen %}
+        <tr>
+          <td>{{ almacen.ID }}</td>
+          <td>{{ almacen.Nombre }}</td>
+          <td>{{ almacen.Direccion }}</td>
+          <td>{{ almacen.Telefono }}</td>
+          <td>
+            <a href="/edit_almacen/{{ almacen.ID }}" class="btn btn-secondary">Editar</a>
+            <a href="/delete_almacen/{{ almacen.ID }}" class="btn btn-danger btn-delete">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="#inicio" class="btn btn-warning">Regresar</a>
+  </div>
+</div>
+<br>
+
+<br>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<br>
+
+<!-- CARRITO DE COMPRAS -->
+<br>
+<div id="tablaCarrito" class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">CARRITO DE COMPRAS</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="card card-body">
+      <form action="{{url_for('carritos.add_carrito')}}" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" name="fecha_creacion" placeholder="Fecha Creación">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="estado" placeholder="Estado">
+        </div>
+        <button class="btn btn-primary btn-block">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Fecha Creación</td>
+          <td>Estado</td>
+          <td>Operaciones</td>
+        </tr>
+      </thead>
+      <tbody>     
+        {% for carrito in carritos %}
+        <tr>
+          <td>{{carrito.ID}}</td>
+          <td>{{carrito.Fecha_Creacion}}</td>
+          <td>{{carrito.Estado}}</td>
+          <td>
+            <a href="/edit_carrito/{{carrito.ID}}" class="btn btn-secondary">Editar</a>
+            <a href="/delete_carrito/{{carrito.ID}}" class="btn btn-danger btn-delete">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="#inicio" class="btn btn-warning">Regresar</a>
+  </div>
+</div>
+<br>
+
+<br>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<br>
+
+<!-- VENTA -->
+<br>
+<div id="tablaVenta" class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">TABLA VENTAS</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="card card-body">
+      <form action="{{url_for('ventas.add_venta')}}" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" name="fecha_venta" placeholder="Fecha Venta">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="total_venta" placeholder="Total Venta">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="metodo_pago" placeholder="Método de Pago">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="cliente_id" placeholder="ID Cliente">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="vendedor_id" placeholder="ID Vendedor">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="carrito_id" placeholder="ID Carrito">
+        </div>
+        <button class="btn btn-primary btn-block">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Fecha Venta</td>
+          <td>Total Venta</td>
+          <td>Método de Pago</td>
+          <td>ID Cliente</td>
+          <td>ID Vendedor</td>
+          <td>ID Carrito</td>
+          <td>Operaciones</td>
+        </tr>
+      </thead>
+      <tbody>     
+        {% for venta in ventas %}
+        <tr>
+          <td>{{venta.ID}}</td>
+          <td>{{venta.Fecha_Venta}}</td>
+          <td>{{venta.Total_Venta}}</td>
+          <td>{{venta.Metodo_Pago}}</td>
+          <td>{{venta.Cliente_ID}}</td>
+          <td>{{venta.Vendedor_ID}}</td>
+          <td>{{venta.Carrito_ID}}</td>
+          <td>
+            <a href="/edit_venta/{{venta.ID}}" class="btn btn-secondary">Editar</a>
+            <a href="/delete_venta/{{venta.ID}}" class="btn btn-danger btn-delete">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="#inicio" class="btn btn-warning">Regresar</a>
+  </div>
+</div>
+
+<br>
+<br>
+
+{% endblock %}
